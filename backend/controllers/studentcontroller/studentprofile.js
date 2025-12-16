@@ -65,7 +65,12 @@ const getStudentProfile = async (req, res) => {
       resumePdf: student.resumePdf || null,
       resumePdfPublicId: student.resumePdfPublicId || null,
       resumeVideo: student.resumeVideo || null,
-      resumeVideoPublicId: student.resumeVideoPublicId || null
+      resumeVideoPublicId: student.resumeVideoPublicId || null,
+      address: student.address || null,
+      city: student.city || null,
+      state: student.state || null,
+      pin: student.pin || null
+
     });
   } catch (err) {
     console.error(err);
@@ -105,7 +110,11 @@ const getStudentProfileById = async (req, res) => {
       resumePdf: student.resumePdf || null,
       resumePdfPublicId: student.resumePdfPublicId || null,
       resumeVideo: student.resumeVideo || null,
-      resumeVideoPublicId: student.resumeVideoPublicId || null
+      resumeVideoPublicId: student.resumeVideoPublicId || null,
+      address: student.address || null,
+      city: student.city || null,
+      state: student.state || null,
+      pin: student.pin || null
     });
   } catch (err) {
     console.error(err);
@@ -131,6 +140,10 @@ const updateStudentProfile = async (req, res) => {
         cgpa,
         mobileNumber,
         domain,
+        address, // Add the address field here
+        city,
+        state,
+        pin,
         isregistered: true
       },
       { new: true }
@@ -163,7 +176,8 @@ const updateStudentProfile = async (req, res) => {
         resumePdf: updatedStudent.resumePdf || null,
         resumePdfPublicId: updatedStudent.resumePdfPublicId || null,
         resumeVideo: updatedStudent.resumeVideo || null,
-        resumeVideoPublicId: updatedStudent.resumeVideoPublicId || null
+        resumeVideoPublicId: updatedStudent.resumeVideoPublicId || null,
+        
       }
     });
   } catch (err) {
