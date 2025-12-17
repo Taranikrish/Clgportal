@@ -37,7 +37,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/yccemplacement',
+    mongoUrl: process.env.MONGO_URI ,
     collectionName: 'sessions'
   }),
   cookie: {
