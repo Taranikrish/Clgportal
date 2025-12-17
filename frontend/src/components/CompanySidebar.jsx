@@ -37,7 +37,7 @@ function CompanySidebar() {
             <Link
               to="/company/dashboard"
               className={`block px-4 py-2 rounded ${
-                location.pathname === '/company/dashboard' && !location.hash
+                location.pathname === '/company/dashboard' && location.pathname.split('/').length === 3
                   ? 'bg-cyan-800/85'
                   : 'hover:bg-cyan-600'
               }`}
@@ -46,18 +46,18 @@ function CompanySidebar() {
               Profile
             </Link>
             <Link
-              to="/company/dashboard#jobs"
+              to="/company/dashboard/jobs"
               className={`block px-4 py-2 rounded ${
-                location.hash === '#jobs' ? 'bg-cyan-800/85' : 'hover:bg-cyan-600'
+                location.pathname === '/company/dashboard/jobs' ? 'bg-cyan-800/85' : 'hover:bg-cyan-600'
               }`}
               onClick={() => setIsOpen(false)}
             >
               Jobs
             </Link>
             <Link
-              to="/company/dashboard#applications"
+              to="/company/dashboard/applications"
               className={`block px-4 py-2 rounded ${
-                location.hash === '#applications' ? 'bg-cyan-800/85' : 'hover:bg-cyan-600'
+                location.pathname === '/company/dashboard/applications' ? 'bg-cyan-800/85' : 'hover:bg-cyan-600'
               }`}
               onClick={() => setIsOpen(false)}
             >

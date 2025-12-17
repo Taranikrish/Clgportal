@@ -76,6 +76,21 @@ function App() {
               <CompanyDashboard />
             </ProtectedRoute>
           } />
+          <Route path='/company/dashboard/jobs' element={
+            <ProtectedRoute allowedRoles={['company', 'admin']}>
+              <CompanyDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path='/company/dashboard/applications' element={
+            <ProtectedRoute allowedRoles={['company', 'admin']}>
+              <CompanyDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path='/company/dashboard/edit' element={
+            <ProtectedRoute allowedRoles={['company', 'admin']}>
+              <CompanyDashboard />
+            </ProtectedRoute>
+          } />
           <Route path='/company/jobs' element={
             <ProtectedRoute allowedRoles={['company']}>
               <Jobs />
