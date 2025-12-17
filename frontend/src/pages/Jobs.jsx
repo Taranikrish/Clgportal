@@ -75,10 +75,10 @@ function Jobs() {
               <p className="text-gray-700 whitespace-pre-line">{job.requirements}</p>
             </div>
             {/* Branch Section */}
-            {job.branch && (
+            {job.branch && Array.isArray(job.branch) && job.branch.length > 0 && (
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Branch</h3>
-                  <p className="text-gray-700">{job.branch}</p>
+                  <p className="text-gray-700">{job.branch.join(', ')}</p>
                 </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -103,8 +103,8 @@ function StudentJobs({ role }) {
   // Filter jobs by branch search
   const filteredJobs = jobs.filter(job => {
     if (!branchSearch) return true
-    if (!job.branch) return false
-    return job.branch.toLowerCase().includes(branchSearch.toLowerCase())
+    if (!job.branch || !Array.isArray(job.branch)) return false
+    return job.branch.includes(branchSearch)
   })
 
   if (loading) {
@@ -178,7 +178,7 @@ function StudentJobs({ role }) {
                   <h3 className="text-xl font-semibold text-gray-700 mb-2">{job.title}</h3>
                   <p className="text-cyan-600 font-medium">{job.companyId.name}</p>
                   <p className="text-gray-500 text-sm">{job.companyId.location}</p>
-                  {job.branch && <p className="text-gray-500 text-sm">Branch: {job.branch}</p>}
+                  {job.branch && Array.isArray(job.branch) && job.branch.length > 0 && <p className="text-gray-500 text-sm">Branch: {job.branch.join(', ')}</p>}
                 </div>
                 <div className="mb-4">
                   <p className="text-gray-600 text-sm mb-2 line-clamp-3">{job.description}</p>

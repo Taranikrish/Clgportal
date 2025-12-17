@@ -115,16 +115,14 @@ function Home() {
               <h2 className="text-3xl font-bold text-slate-900 ">Get in Touch</h2>
               <p className="mt-2 mb-8 text-slate-600 ">Have questions? We're here to help. Reach out to our placement coordinator.</p>
               <div className="inline-block p-8 bg-background-light  rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold text-slate-800 ">Dr. A. B. Sharma</h3>
-                <p className="text-slate-500 ">Placement Coordinator</p>
+                <h3 className="text-xl font-semibold text-slate-800 ">Dr. Rakhi Wajgi</h3>
+                <p className="text-slate-500 ">dean(T&P)</p>
                 <div className="mt-4 space-y-2 text-left">
                   <a className="flex items-center gap-3 text-primary hover:underline" href="mailto:placement@ycce.edu">
-                    <span className="material-icons">email</span>
-                    placement@ycce.edu
+                    rdwajgi@ycce.edu
                   </a>
                   <a className="flex items-center gap-3 text-primary hover:underline" href="tel:+911234567890">
-                    
-                    +91 123 456 7890
+                    +91 9970238062
                   </a>
                   <div className="flex items-center gap-3 text-slate-600 ">
                     

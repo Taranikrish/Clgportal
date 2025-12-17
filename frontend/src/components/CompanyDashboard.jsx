@@ -17,6 +17,7 @@ function CompanyDashboard() {
     salary: '',
     location: '',
     deadline: '',
+    branch: [],
     jdFile: null
   })
   const [activeTab, setActiveTab] = useState('profile')
@@ -35,6 +36,7 @@ function CompanyDashboard() {
   const location = useLocation()
 // Define branches array
 const branches = [
+  "All Branches",
   'Computer Science & Engineering',
   'Information Technology',
   'Electronics & Telecommunication',
@@ -151,7 +153,9 @@ const branches = [
       formData.append('salary', jobData.salary || '')
       formData.append('location', jobData.location || '')
       if (jobData.deadline) formData.append('deadline', jobData.deadline)
-    if (jobData.branch) formData.append('branch', jobData.branch) // add branch here
+      if (jobData.branch && jobData.branch.length > 0) {
+        jobData.branch.forEach(branch => formData.append('branch', branch))
+      }
 
       // Attach JD file using the field name expected by backend (uploadJdFile.single('jd_file'))
       if (jobData.jdFile) {
@@ -189,7 +193,7 @@ const branches = [
         salary: '',
         location: '',
         deadline: '',
-        branch: '',
+        branch: [],
         jdFile: null
       })
 
@@ -460,7 +464,7 @@ const renderContent = () => {
                           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                           </svg>
-                          Branch: {job.branch || 'Any'}
+                          Branches: {job.branch && job.branch.length > 0 ? job.branch.join(', ') : 'Any'}
                         </div>
                         
                         <div className="flex items-center text-sm text-gray-500">
@@ -550,8 +554,8 @@ const renderContent = () => {
                 </div>
                 {/* ⚠️ Added Branch Field to Job Details */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Eligible Branch</label>
-                  <p className="mt-1 text-lg">{selectedJob.branch || 'Any'}</p>
+                  <label className="block text-sm font-medium text-gray-700">Eligible Branches</label>
+                  <p className="mt-1 text-lg">{selectedJob.branch && selectedJob.branch.length > 0 ? selectedJob.branch.join(', ') : 'Any'}</p>
                 </div>
                 {/* ⚠️ Corrected Date Field (Previously duplicate 'Created Date') */}
                 <div>
@@ -646,20 +650,28 @@ const renderContent = () => {
                   />
                 </div>
 
-                {/* Branch Input - Already exists and is correct */}
+                {/* Branch Input - Multiple selection with checkboxes */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Eligible Branch</label>
-                  <select
-                    value={jobData.branch || ''}
-                    onChange={(e) => setJobData({ ...jobData, branch: e.target.value })}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 bg-white focus:ring-cyan-500 focus:border-cyan-500"
-                  >
-                    <option value="" disabled>Select a branch</option>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Eligible Branches</label>
+                  <div className="mt-1 grid grid-cols-1 md:grid-cols-2 gap-2">
                     {branches.map((branch, index) => (
-                      <option key={index} value={branch}>{branch}</option>
+                      <label key={index} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={jobData.branch.includes(branch)}
+                          onChange={(e) => {
+                            const selectedBranches = e.target.checked
+                              ? [...jobData.branch, branch]
+                              : jobData.branch.filter(b => b !== branch);
+                            setJobData({ ...jobData, branch: selectedBranches });
+                          }}
+                          className="mr-2 h-4 w-4 text-cyan-600 focus:ring-cyan-500 border-gray-300 rounded"
+                        />
+                        <span className="text-sm text-gray-700">{branch}</span>
+                      </label>
                     ))}
-                  </select>
-                  <p className="text-sm text-gray-500 mt-1">Select the eligible branch for this job.</p>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-1">Select the eligible branches for this job.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

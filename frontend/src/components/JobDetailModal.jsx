@@ -33,7 +33,7 @@ function JobDetailModal({ job, isOpen, onClose, onApply, applying, isApplied, ap
                 </div>
                 <div>
                   <span className="font-medium text-gray-700">Branch:</span>
-                  <span className="ml-2">{job.branch ? job.branch : 'Not specified'}</span>
+                  <span className="ml-2">{job.branch && Array.isArray(job.branch) && job.branch.length > 0 ? job.branch.join(', ') : 'Not specified'}</span>
                 </div>
                 <div>
                   <span className="font-medium text-gray-700">Deadline:</span>
