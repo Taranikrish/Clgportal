@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AdminSidebar from '../components/AdminSidebar.jsx';
 
 /* ===================== CONSTANT DATA ===================== */
@@ -47,6 +48,7 @@ const domainMapping = {
 
 /* ===================== COMPONENT ===================== */
 function SearchStudent() {
+  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -277,7 +279,7 @@ function SearchStudent() {
                 <div
                   key={s._id}
                   className="p-4 border-b hover:bg-gray-50 cursor-pointer"
-                  onClick={() => window.location.href = `/admin/student/${s._id}`}
+                  onClick={() => navigate(`/admin/student/${s._id}`)}
                 >
                   <div className="grid md:grid-cols-4 gap-4">
                     <p>{s.name}</p>

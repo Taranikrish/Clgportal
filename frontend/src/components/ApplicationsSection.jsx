@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function ApplicationsSection({ applications }) {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-semibold mb-4">Applications Received</h2>
@@ -28,7 +31,7 @@ function ApplicationsSection({ applications }) {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {applications.map((application, index) => (
-                <tr key={index} className="hover:bg-gray-50 cursor-pointer" onClick={() => window.location.href = `/company/dashboard/applications/${application.studentId._id}`}>
+                <tr key={index} className="hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/company/dashboard/applications/${application.studentId._id}`)}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {application.studentId.name}
                   </td>
