@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import AdminSidebar from '../components/AdminSidebar.jsx'
+import { useNavigate } from 'react-router-dom'
 
 function CompanySearch() {
+  const navigate = useNavigate()
   const [companies, setCompanies] = useState([])
   const [filteredCompanies, setFilteredCompanies] = useState([])
   const [loading, setLoading] = useState(false)
@@ -173,7 +175,7 @@ function CompanySearch() {
               {filteredCompanies.length > 0 ? (
                 <div className="divide-y">
                   {filteredCompanies.map((company, index) => (
-                    <div key={index} className="p-4 hover:bg-gray-50 cursor-pointer" onClick={() => window.location.href = `/company/dashboard?companyId=${company._id}`}>
+                    <div key={index} className="p-4 hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/company/dashboard?companyId=${company._id}`)}>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700">Company Name</label>
