@@ -15,10 +15,13 @@ function AdminStudentView({role}) {
 
   const fetchStudentProfile = async () => {
     try {
+        const auth = JSON.parse(localStorage.getItem('auth'))
+      
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/student/profile/${studentId}`, {
-        credentials: 'include',
+
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         },
       })
       if (response.ok) {

@@ -33,9 +33,10 @@ function StudentJobs({ role }) {
 
   const fetchJobs = async () => {
     try {
+      const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/student/jobs`, {
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${auth?.token}` },
       })
       if (response.ok) {
         const data = await response.json()
@@ -53,9 +54,10 @@ function StudentJobs({ role }) {
 
   const fetchApplications = async () => {
     try {
+      const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/student/applications`, {
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${auth?.token}` },
       })
       if (response.ok) {
         const data = await response.json()
@@ -72,10 +74,11 @@ function StudentJobs({ role }) {
     setSuccess('')
 
     try {
+      const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/student/jobs/apply`, {
         method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
+        
+        headers: { 'Content-Type': 'application/json' , Authorization: `Bearer ${auth?.token}` },
         body: JSON.stringify({ jobId })
       })
 

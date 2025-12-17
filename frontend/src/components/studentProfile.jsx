@@ -12,15 +12,18 @@ function StudentProfile() {
     const fetchStudentProfile = async () => {
         try {
         setLoading(true)
+        const auth = JSON.parse(localStorage.getItem('auth'))
         // Always fetch current user's profile, ignore studentId parameter
         const url = `${import.meta.env.VITE_API_BASE_URL}/api/student/profile`
 
         const response = await fetch(url, {
-            credentials: 'include',
+            method: 'GET',
             headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth?.token}`,
             },
         })
+           
         if (response.ok) {
             const data = await response.json()
             setStudentProfile(data)

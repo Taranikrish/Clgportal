@@ -38,10 +38,12 @@ function StudentDetail() {
     const fetchStudentProfile = async () => {
         try {
             setLoading(true)
+            const auth=JSON.parse(localStorage.getItem('auth'))
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/student/profile`, {
-                credentials: 'include',
+                
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${auth?.token}`,
                 },
             })
             if (response.ok) {
@@ -113,11 +115,13 @@ function StudentDetail() {
     setSuccess('')
 
     try {
+      const auth=JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/student/profile`, {
         method: 'PUT',
-        credentials: 'include',
+        
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         },
         body: JSON.stringify({
           branch: formData.branch,
@@ -427,9 +431,13 @@ function StudentDetail() {
     if (type === 'resumeVideo') endpoint = '/api/student/profile/resume-video'
 
     try {
+      const auth=JSON.parse(localStorage.getItem('auth'))
       const resp = await fetch(`${import.meta.env.VITE_API_BASE_URL}${endpoint}`, {
         method: 'DELETE',
-        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
+        },
       })
       if (resp.ok) {
         await fetchStudentProfile()

@@ -4,14 +4,16 @@ import AdminSidebar from './AdminSidebar.jsx'
 function AdminDashboard() {
   const [adminProfile, setAdminProfile] = useState(null)
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     const fetchAdminProfile = async () => {
       try {
+          const auth = JSON.parse(localStorage.getItem('auth'))
+
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admin/profile`, {
-          credentials: 'include',
+          
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth?.token}`,
           },
         })
         if (response.ok) {

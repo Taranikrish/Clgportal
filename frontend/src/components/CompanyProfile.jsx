@@ -10,11 +10,14 @@ function CompanyProfile({ company }) {
     }
 
     try {
+      const auth = JSON.parse(localStorage.getItem('auth'))
+    
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/company/profile`, {
         method: 'DELETE',
-        credentials: 'include',
+        
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         }
       })
 

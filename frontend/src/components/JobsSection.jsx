@@ -120,11 +120,13 @@ function JobsSection({ jobs: initialJobs, company, branches }) {
     }
 
     try {
+      const auth = JSON.parse(localStorage.getItem('auth')) // Get auth
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/company/jobs/${jobId}`, {
         method: 'DELETE',
-        credentials: 'include',
+        
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         }
       })
 

@@ -15,9 +15,10 @@ function CompanySearch() {
       const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admin/companies`, {
         method: 'GET',
-        credentials: 'include',
+        
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         }
       })
       if (response.ok) {
@@ -56,11 +57,12 @@ function CompanySearch() {
 
     setVerifying(companyId)
     try {
+      const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admin/companies/${companyId}/verify`, {
         method: 'PATCH',
-        credentials: 'include',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         },
         body: JSON.stringify({ status: newStatus })
       })
@@ -94,11 +96,12 @@ function CompanySearch() {
 
     setDeleting(companyId)
     try {
+      const auth=JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admin/companies/${companyId}`, {
         method: 'DELETE',
-        credentials: 'include',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         }
       })
 

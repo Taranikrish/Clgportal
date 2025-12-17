@@ -13,9 +13,10 @@ function Jobs() {
       const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/company/jobs`, {
         method: 'POST',
-        credentials: 'include',
+        
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         },
         body: JSON.stringify(job),
       })

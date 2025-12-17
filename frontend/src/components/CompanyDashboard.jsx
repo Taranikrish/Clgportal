@@ -32,14 +32,17 @@ function CompanyDashboard() {
     const fetchCompanyData = async () => {
       try {
         // Fetch company profile
+        const auth = JSON.parse(localStorage.getItem('auth'))
+      
         const profileUrl = isAdminView
           ? `${import.meta.env.VITE_API_BASE_URL}/api/company/profile/${companyId}`
           : `${import.meta.env.VITE_API_BASE_URL}/api/company/profile`
 
         const profileResponse = await fetch(profileUrl, {
-          credentials: 'include',
+          
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth?.token}`,
           },
         })
 
@@ -66,9 +69,10 @@ function CompanyDashboard() {
 
           // Fetch applications
           const appsResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/company/applications`, {
-            credentials: 'include',
+            
             headers: {
               'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth?.token}`,
             },
           })
           if (appsResponse.ok) {

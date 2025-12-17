@@ -17,10 +17,13 @@ function EditProfile() {
   useEffect(() => {
     const fetchCompanyProfile = async () => {
       try {
+        const auth = JSON.parse(localStorage.getItem('auth'))
+      
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/company/profile`, {
-          credentials: 'include',
+          
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth?.token}`,
           },
         })
         if (response.ok) {
@@ -47,11 +50,12 @@ function EditProfile() {
     setSuccess('')
 
     try {
+      const auth = JSON.parse(localStorage.getItem('auth'))
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/company/profile`, {
         method: 'PUT',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
         },
         body: JSON.stringify(editForm)
       })

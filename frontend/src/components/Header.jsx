@@ -10,8 +10,12 @@ function Header() {
 
   const handleLogout = async () => {
     try {
+      const auth=JSON.parse(localStorage.getItem('auth')) 
       await fetch(`${import.meta.env.VITE_API_BASE_URL}/logout`, {
-        credentials: 'include'
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth?.token}`,
+        },
       });
     } catch (error) {
       console.error('Logout error:', error);
