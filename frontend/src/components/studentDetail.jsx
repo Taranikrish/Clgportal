@@ -363,11 +363,14 @@ function StudentDetail() {
       if (type === 'resumePdf') form.append('resumePdf', fileToUpload)
       if (type === 'resumeVideo') form.append('resumeVideo', fileToUpload)
 
+      const auth = JSON.parse(localStorage.getItem('auth'))
       const url = `${import.meta.env.VITE_API_BASE_URL}${endpoint}`
 
       const resp = await fetch(url, {
         method: 'POST',
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
         body: form,
       })
 
